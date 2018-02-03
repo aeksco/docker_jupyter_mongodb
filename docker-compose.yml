@@ -1,0 +1,27 @@
+# Jupyter Data Science notebook & MongoDB
+version: '2'
+
+services:
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  mongo_admin:
+    image: mongo-express
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    ports:
+      - "8081:8081"
+
+  jupyter:
+    image: jupyter/datascience-notebook
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    ports:
+      - "8888:8888"
