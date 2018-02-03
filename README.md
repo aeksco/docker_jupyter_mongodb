@@ -29,3 +29,7 @@ Includes example Jupyter notebook to push data to MongoDB, and a [mongo-express]
 - Jupyter server running at [http://localhost:8888](http://localhost:8888)
 
 - Run the `MongoDB` notebook to create the `jupyter` database and a single example `restaurant` record
+
+## Notes
+
+- This configuration is not optimized for size. The `jupyter/datascience-notebook` has a footprint of 6.28 GB - you could substitute the `jupyter/minimal-notebook` (footprint of 2.74 GB) by changing the `FROM` statement in `jupyter/Dockerfile`.
