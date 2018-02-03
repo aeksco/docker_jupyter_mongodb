@@ -5,11 +5,13 @@ services:
 
   mongo:
     image: mongo
+    container_name: 'mongo'
     ports:
       - "27017:27017"
 
   mongo_admin:
     image: mongo-express
+    container_name: 'mongoadmin'
     depends_on:
       - mongo
     links:
@@ -18,7 +20,8 @@ services:
       - "8081:8081"
 
   jupyter:
-    image: jupyter/datascience-notebook
+    build: ./jupyter
+    container_name: 'jupyter'
     depends_on:
       - mongo
     links:
