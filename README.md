@@ -33,3 +33,22 @@ Includes example Jupyter notebook to push data to MongoDB, and a [mongo-express]
 ## Notes
 
 - This configuration is not optimized for size. The `jupyter/datascience-notebook` has a footprint of 6.28 GB - you could substitute the `jupyter/minimal-notebook` (footprint of 2.74 GB) by changing the `FROM` statement in `jupyter/Dockerfile`.
+
+
+## Optional NGINX Configuration
+- Run the following to setup an NGINX reverse-proxy to the Jupyter Notebook server
+  ```
+  sudo apt-get update
+  sudo apt-get install nginx
+  ```
+
+<!-- sudo nano /etc/nginx/sites-available/my_site
+< PASTE ABOVE AND SAVE >
+ln -s /etc/nginx/sites-available/my_site /etc/nginx/sites-enabled/my_site
+
+sudo systemctl start nginx
+sudo systemctl stop nginx
+sudo systemctl restart nginx
+
+Run install_c_kernel command as root user with docker-compose run
+docker-compose run --user="root" jupyter install_c_kernel -->
