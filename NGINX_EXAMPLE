@@ -1,7 +1,7 @@
 server {
 
   listen 80;
-  server_name hotsheets.work;
+  server_name mysite.com;
   charset utf-8;
 
   location / {
