@@ -34,6 +34,10 @@ Includes example Jupyter notebook to push data to MongoDB, and a [mongo-express]
 
 - This configuration is not optimized for size. The `jupyter/datascience-notebook` has a footprint of 6.28 GB - you could substitute the `jupyter/minimal-notebook` (footprint of 2.74 GB) by changing the `FROM` statement in `jupyter/Dockerfile`.
 
+- You may run a command inside the `jupyter` docker container as the root user with the following command:
+
+  `docker-compose run --user="root" jupyter pip install pandas`
+
 
 ## Optional NGINX Configuration
 - Run the following to setup an NGINX reverse-proxy to the Jupyter Notebook server
@@ -42,13 +46,16 @@ Includes example Jupyter notebook to push data to MongoDB, and a [mongo-express]
   sudo apt-get install nginx
   ```
 
-<!-- sudo nano /etc/nginx/sites-available/my_site
-< PASTE ABOVE AND SAVE >
-ln -s /etc/nginx/sites-available/my_site /etc/nginx/sites-enabled/my_site
+- Copy the contents of `NGINX_EXAMPLE` into `/etc/nginx/sites-available/my_site`
 
-sudo systemctl start nginx
-sudo systemctl stop nginx
-sudo systemctl restart nginx
+- Simlink the file from `sites-available` to `sites-enabled`
 
-Run install_c_kernel command as root user with docker-compose run
-docker-compose run --user="root" jupyter install_c_kernel -->
+  `ln -s /etc/nginx/sites-available/my_site /etc/nginx/sites-enabled/my_site`
+
+- Control NGINX with the following system commands:
+
+    ```
+    sudo systemctl start nginx
+    sudo systemctl stop nginx
+    sudo systemctl restart nginx
+    ```
