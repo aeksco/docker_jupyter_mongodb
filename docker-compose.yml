@@ -6,6 +6,8 @@ services:
   mongo:
     image: mongo
     container_name: 'mongo'
+    networks:
+      - backend
     ports:
       - "27017:27017"
 
@@ -16,8 +18,12 @@ services:
       - mongo
     links:
       - mongo
+    networks:
+      - backend
     ports:
       - "8081:8081"
+    environment:
+      - ME_CONFIG_SITE_BASEURL=/mongo
 
   jupyter:
     build: ./jupyter
@@ -26,5 +32,24 @@ services:
       - mongo
     links:
       - mongo
+    networks:
+      - backend
     ports:
       - "8888:8888"
+
+  web:
+    build: ./nginx
+    container_name: 'nginx'
+    ports:
+     - "80:80"
+    networks:
+      - backend
+    links:
+      - jupyter
+      - mongo_admin
+    environment:
+      - NGINX_HOST=mysite.com
+      - NGINX_PORT=80
+
+networks:
+  backend:

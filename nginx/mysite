@@ -6,7 +6,7 @@ server {
 
   # Jupyter running at mysite.com
   location / {
-    proxy_pass http://localhost:8888;
+    proxy_pass jupyter:8888;
     proxy_set_header Host $host;
     proxy_set_header Referer $http_referer;
     proxy_set_header X-Forwarded-For $remote_addr;
@@ -19,7 +19,7 @@ server {
 
   # MongoExpress running at mysite.com/mongo
   location /mongo {
-    proxy_pass http://localhost:8081;
+    proxy_pass mongo_admin:8081;
     proxy_set_header Host $host;
     proxy_set_header Referer $http_referer;
     proxy_set_header X-Forwarded-For $remote_addr;
